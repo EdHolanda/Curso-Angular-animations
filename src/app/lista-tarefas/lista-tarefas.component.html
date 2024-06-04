@@ -1,6 +1,6 @@
 <section class="criar-tarefa">
   <div class="botao-criar">
-    <button (click)="mostrarOuEsconderFormulario()">
+    <button type="button" (click)="mostrarOuEsconderFormulario()">
       Criar nova tarefa
     </button>
   </div>
@@ -19,7 +19,7 @@
       mensagemValidacao="Preencha a descrição">
     </app-mensagem>
     <label for="prioridade">Prioridade</label>
-    <select required
+    <select title="Prioridade" required
       formControlName="prioridade"
       [ngClass]="campoValidado('prioridade')"
     >
@@ -34,6 +34,7 @@
     </app-mensagem>
     <label for="categoria">Categoria</label>
     <select required
+      title="Categoria"
       formControlName="categoria"
       [ngClass]="campoValidado('categoria')"
     >
@@ -48,6 +49,7 @@
     </app-mensagem>
     <div class="botoes-form">
       <button
+        type="button"
         (click)="salvarTarefa()"
         class="botao-form"
         [ngClass]="habilitarBotao()"
@@ -55,6 +57,7 @@
           Salvar
       </button>
       <button
+        type="button"
         (click)="cancelar()"
         class="botao-form botao-cancelar">
           Cancelar
@@ -69,6 +72,10 @@
         alt="Ilustração de um ambiente com mesa, computador, quadro e um vaso com planta">
   </div>
   <div *ngIf="listaTarefas.length > 0, else semTarefas">
+    <div class="busca">
+      <p class="ff-propt">Procurando o que fazer?</p>
+      <input type="search" id="campo-busca" placeholder="Busque por uma tarefa">
+    </div>
     <div
       class="lista-tarefas card-{{ tarefa.categoria }}"
       *ngFor="let tarefa of listaTarefas; let i = index"
@@ -86,6 +93,8 @@
         </p>
         <p class="status-tarefa">
           <button
+            type="button"
+            title="Botao finalizar"
             [ngClass]="(tarefa.statusFinalizado == true) ? 'icone-checked' : 'icone-unchecked'"
             (click)="finalizarTarefa(tarefa.id)"
             [@checkButton]="(tarefa.id === id ? 'checked' : 'unchecked')"
